@@ -47,5 +47,4 @@ class chASM {
 
 }; //class chASM
 
-
 #endif
