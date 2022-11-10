@@ -5,6 +5,13 @@
 	An oscilloscope, frequency counter or some other form of external equipment
 	in order to measure the signals.
 	
+	****************************************************************************
+	My measurments showed a default speed of between 250KHz and 333KHz
+	depending on the pin used - and a library speed of 1.500MHz on every pin.
+	   
+	This is an improvent of between 6x and 4.5x
+	****************************************************************************
+	
 	ADBeta 10 Nov 2022
 */
 
@@ -12,27 +19,40 @@
 
 //Declare both pins, one is a chASM pin the other is a built-in pin
 #define slowPin 10
-chASM fastPin(9);
+chASM fastPin(10);
 
 void setup() {
-	//Configure both pins to be outputs
+	//Configure the pin to be an OUTPUT
 	fastPin.setMode(OUTPUT);
-	pinMode(slowPin, OUTPUT);
 	
-	uint8_t state = 0;
-	
+	//Unrolled the loop so speed is more directly comparable per test.	
+	//Uncomment the test you wish to test
 	while(true) {
 		/** Fast pin **/
-		//fastPin.write(state);
+		/*
+		fastPin.write(1);
+		fastPin.write(0);
+		fastPin.write(1);
+		fastPin.write(0);
+		fastPin.write(1);
+		fastPin.write(0);
+		fastPin.write(1);
+		fastPin.write(0);
+		*/
 		
 		/** Slow Pin **/
-		digitalWrite(slowPin, state);
-		
-		//Invert state to create the pulse
-		state = ~state;
+		///*
+		digitalWrite(slowPin, HIGH);
+		digitalWrite(slowPin, LOW);
+		digitalWrite(slowPin, HIGH);
+		digitalWrite(slowPin, LOW);
+		digitalWrite(slowPin, HIGH);
+		digitalWrite(slowPin, LOW);
+		digitalWrite(slowPin, HIGH);
+		digitalWrite(slowPin, LOW);
+		//*/
 	}
 }
 
 void loop() {
-
 }
