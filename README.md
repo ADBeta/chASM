@@ -35,7 +35,11 @@ To Read a bit from the chASM Pin -
 
 ## Changelog
 * 2.0.1 - Added better readibilty.
+<<<<<<< HEAD
 * 2.1.2 - Added speed tests, bugfixed.
+=======
+* 2.1.0 - Added speed tests, bugfixed.
+>>>>>>> 990a6de (refactor)
 * 2.1.4 - Improved the speed_test example.
 * 3.1.4 - Changed how the Bitmasking worked, so bitwise inversion isn't done  
 every time the functions are called. This increased speed by another 2x

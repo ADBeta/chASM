@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include <chASM.h>
+=======
+#include "chASM.h"
+>>>>>>> 990a6de (refactor)
 
 //Initialise the assembly pin object and set all the internal vars
 chASM::chASM(uint8_t pin) {
