@@ -11,8 +11,6 @@
 	   
 	This is an improvent of between 6x and 4.5x
 	****************************************************************************
-	
-	ADBeta 10 Nov 2022
 */
 
 #include <chASM.h>

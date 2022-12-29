@@ -10,10 +10,10 @@ void setup() {
 
 void loop() {
 	//Write LED HIGH, then wait
-	LED_PIN.write(1);
+	LED_PIN.write(HIGH);
 	delay(1000);
 	
 	//Write LED LOW, then wait
-	LED_PIN.write(0);
+	LED_PIN.write(LOW);
 	delay(1000);
 }

@@ -1,18 +1,14 @@
-/*
-	chASM - control hardware /with/ ASM
-	Low level hardware functions using Direct Port Manipulation for max speed.
-	The safety features of the arduino system calls are abandoned for speed too.
-	Please read the README.md file for more information
-	
-	**** If this library is in use within another project, please see the
-	original github page: https://github.com/ADBeta/chASM
-	
-	//TODO Add usage to readme
-	//TODO Add timer control? (at least kill timer?)
-	
-	Version 3.1.4
-	Last Modified 10 Nov 2022
-	(c) ADBeta
+/*    chASM - control hardware /with/ ASM
+* Low level hardware control library using Direct Port Manipulation.
+*
+* The safety features of the Arduino system calls are abandoned in return for 
+* added speed and efficiency.
+* Please read the README.md file for more information
+* 
+* If this library is in use within another project, please see the original 
+* github page: https://github.com/ADBeta/chASM
+*
+* (c) ADBeta
 */
 
 #ifndef chASM_H

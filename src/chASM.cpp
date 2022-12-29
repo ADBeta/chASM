@@ -1,8 +1,19 @@
-<<<<<<< HEAD
-#include <chASM.h>
-=======
+/*    chASM - control hardware /with/ ASM
+* Low level hardware control library using Direct Port Manipulation.
+*
+* The safety features of the Arduino system calls are abandoned in return for 
+* added speed and efficiency.
+* Please read the README.md file for more information
+* 
+* If this library is in use within another project, please see the original 
+* github page: https://github.com/ADBeta/chASM
+*	
+* Version 3.2.5
+* 29 Dec 2022
+* (c) ADBeta
+*/
+
 #include "chASM.h"
->>>>>>> 990a6de (refactor)
 
 //Initialise the assembly pin object and set all the internal vars
 chASM::chASM(uint8_t pin) {
