@@ -59,7 +59,7 @@ extScope.pin->write(HIGH);
 
 Another method to do the same thing is to use the `new` operator. This is not  
 recommended in Arduino, as it implies a large heap allocation, but it is easier  
-to use and more understandable.
+to use and more understandable.  
 ```
 //inside class or library scope
 struct extScope {
@@ -81,10 +81,46 @@ extScope.pin->write(HIGH);
 For more information about using chASM for undefined until constructed uses, such  
 as in libraries or classes etc, see the 'library_demo' example.  
 
+## Notes
+Speed Measurements:  
+These tests have been conducted in a few ways, this is to try to get accurate  
+estimates for common usecases. Some things cannot be avoided, such as the delay  
+between `void loop() { }` loops. This is fair due to the average usecase; also  
+because digitalRead will be used as a control, in the exact same manner.  
+
+All tests have been conducted with a Racal-Dana 9914 VHF Freq. Counter, which has  
+been calibrated to 8Hz standard deviation.  
+
+Test Methods:  
+```
+void loop() {
+	write( HIGH );
+	write( LOW );
+}
+```
+digitalWrite:  146.9KHz  
+chASM:         610.5KHz    4.15x faster  
+
+```
+void loop() {
+	write( HIGH );
+	write( LOW );
+	write( HIGH );
+	write( LOW );
+	(Repeat 5 times)
+}
+```
+digitalWrite:  151.5KHz  
+chASM:         409.9KHz    2.70x faster  
+
+Conclusion:  
+It seems that the class call overhead is relatively large. This library is still  
+considerably faster than digitalRead/Write but is not very consistent amounts faster.  
+
 ## TODO
 * Look into timers being altered by this library.  
 * Look into analogRead support for this library.  
-* Repeat speed tests in a more detailed manner, using a frequency counter.  
+* Consider changing class type to POD type, since overhead is higher than expected  
 
 ## Changelog
 * 2.0.1 - Added better readibilty.  
