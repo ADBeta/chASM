@@ -28,6 +28,12 @@ Test again with actual inlineing:
 function calls. This is a good improvement. Each call to write() takes 17 bytes.  
 - Each digitalWrite call takes 6 bytes. this is a 2.8% increase in PGRM space usage  
 
+********************************************************************************
+Testing mockup of SR595 using inlined function calls.  
+chASM without inline: PRGM usage: 1038 Bytes / 66 Bytes   speed: 8.84KHz  
+Inlined chASM: PRGM usage: 1082 Bytes / 66 bytes    speed: 10.15KHz  
+
+This uses 4% more PRGM, for a 15% speed improvement. Is this an okay sacrifice?  
 
 --------------------------------------------------------------------------------
 This software is under the GPL v3 licence by ADBeta 2022. please read the
