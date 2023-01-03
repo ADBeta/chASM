@@ -21,6 +21,9 @@ Plan B) Inline functions
 
 Omitting if test in write() increases speed by 50KHz
 
+Plan B was not fully realized because inlining on arduino is specific and weird.  
+Test again with actual inlineing: 
+
 chASM is an Arduino library to allow very fast hardware control using assembly  
 and Direct Port Manipulation. This is ideal for projects that require high  
 speed digital hardware control.  
