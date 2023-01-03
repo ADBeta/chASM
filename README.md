@@ -1,5 +1,17 @@
 # chASM - Control Hardware /with/ ASM 
-<b> (c) ADBeta 2022  2023</b>
+## Optimization chasing branch 
+<b> (c) ADBeta  2023</b>
+
+<b> This branch is chasing optimizations... Since testing the speed of chASM, which  
+showed to be around 4x faster at best, and slowed down the more times the functions  
+were called. - Having since then tested a Plain-Old-Data version of the library  
+I can see that the back anf forth calling of - specifically class - functions  
+is much slower desired.  
+
+chASM Release 1 got a best case speed of 610KHz, and the P.O.D version got  
+1.133MHz, an 85% improvement. (POD-Speed-test.ino).  
+
+Multiple function calls per scope is still slower than desired.</b>  
 
 chASM is an Arduino library to allow very fast hardware control using assembly  
 and Direct Port Manipulation. This is ideal for projects that require high  
@@ -82,40 +94,6 @@ For more information about using chASM for undefined until constructed uses, suc
 as in libraries or classes etc, see the 'library_demo' example.  
 
 ## Notes
-Speed Measurements:  
-These tests have been conducted in a few ways, this is to try to get accurate  
-estimates for common usecases. Some things cannot be avoided, such as the delay  
-between `void loop() { }` loops. This is fair due to the average usecase; also  
-because digitalRead will be used as a control, in the exact same manner.  
-
-All tests have been conducted with a Racal-Dana 9914 VHF Freq. Counter, which has  
-been calibrated to 8Hz standard deviation.  
-
-Test Methods:  
-```
-void loop() {
-	write( HIGH );
-	write( LOW );
-}
-```
-digitalWrite:  146.9KHz  
-chASM:         610.5KHz    4.15x faster  
-
-```
-void loop() {
-	write( HIGH );
-	write( LOW );
-	write( HIGH );
-	write( LOW );
-	(Repeat 5 times)
-}
-```
-digitalWrite:  151.5KHz  
-chASM:         409.9KHz    2.70x faster  
-
-Conclusion:  
-It seems that the class call overhead is relatively large. This library is still  
-considerably faster than digitalRead/Write but is not very consistent amounts faster.  
 
 ## TODO
 * Look into timers being altered by this library.  

@@ -1,13 +1,13 @@
+//***** ~1.5us - 610KHz ********************//
 #include "chASM.h"
 
-chASM p(8);
+chASM pin(8);
 
 void setup() {
-	p.setMode(OUTPUT);
+	pin.setMode(OUTPUT);
 }
 
 void loop() {
-	p.write(HIGH);
-	p.write(LOW);
-
+	pin.write(HIGH);
+	pin.write(LOW);
 }
