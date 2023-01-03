@@ -11,10 +11,10 @@
 * (c) ADBeta
 */
 
+#include <Arduino.h>
+
 #ifndef chASM_H
 #define chASM_H
-
-#include <Arduino.h>
 
 //Each pin is treated as an object, this is so each function call doesn't need
 //to initialise the ports and bit position per call. do it once per construction

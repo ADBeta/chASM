@@ -13,6 +13,9 @@ chASM Release 1 got a best case speed of 610KHz, and the P.O.D version got
 
 Multiple function calls per scope is still slower than desired.</b>  
 
+Plan A) externalized calls with read and write. Pass variables to functions  
+--- This did not work. Same speed as normal
+
 chASM is an Arduino library to allow very fast hardware control using assembly  
 and Direct Port Manipulation. This is ideal for projects that require high  
 speed digital hardware control.  
