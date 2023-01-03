@@ -45,22 +45,6 @@ void chASM::setMode(uint8_t mode) {
 	}
 }
 
-//Write binary state to the pin
-void chASM::write(bool state) {
-	while(true) {
-		wh();
-		wl();
-	}
-}
-
-void chASM::wh() {
-	*_asm_opr |= _asm_mask_nom; //Set mask bit in output register to HIGH
-}
-
-void chASM::wl() {
-	*_asm_opr &= _asm_mask_inv; //Set mask bit in output register to LOW
-}
-
 //Read a binary state from the pin and return it
 bool chASM::read(void) {
 	//Read the input register and mask it. Simple comparation is faster than	
