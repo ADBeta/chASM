@@ -26,6 +26,10 @@ class chASM {
 	/*** Simple input/output functions ****************************************/
 	//Writes a binary state to the pin
 	void write(bool state);
+	
+	void wh();
+	void wl();	
+	
 	//Reads and returns a binary state from the pin
 	bool read(void);
 	

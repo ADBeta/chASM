@@ -9,5 +9,5 @@ void setup() {
 
 void loop() {
 	pin.write(HIGH);
-	pin.write(LOW);
+	//pin.write(LOW);
 }
