@@ -86,11 +86,6 @@ as in libraries or classes etc, see the 'library_demo' example.
 
 ## Notes
 Speed Measurements:  
-These tests have been conducted in a few ways, this is to try to get accurate  
-estimates for common usecases. Some things cannot be avoided, such as the delay  
-between `void loop() { }` loops. This is fair due to the average usecase; also  
-because digitalRead will be used as a control, in the exact same manner.  
-
 All tests have been conducted with a Racal-Dana 9914 VHF Freq. Counter, which has  
 been calibrated to 8Hz standard deviation.  
 
@@ -114,11 +109,7 @@ void loop() {
 }
 ```
 digitalWrite:  151.5KHz  
-chASM:         409.9KHz    2.70x faster  
-
-Conclusion:  
-It seems that the class call overhead is relatively large. This library is still  
-considerably faster than digitalRead/Write but is not very consistent amounts faster.  
+chASM:         690.1KHz    4.55x faster  
 
 ## TODO
 * Look into timers being altered by this library.  
@@ -135,6 +126,7 @@ every time the functions are called. This increased speed by another 2x
 to Usage  
 * 3.2.5 - Added an external library example in the examples dir.  
 * 4.2.5 - Inline solution to speed problem. End result of Optimize branch.  
+* 4.2.6 - Did final tests and fixed merge mess. Ready for release.  
 
 --------------------------------------------------------------------------------
 This software is under the GPL v3 licence by ADBeta 2023. please read the
