@@ -11,10 +11,10 @@
 * (c) ADBeta
 */
 
+#include <Arduino.h>
+
 #ifndef chASM_H
 #define chASM_H
-
-#include <Arduino.h>
 
 //Each pin is treated as an object, this is so each function call doesn't need
 //to initialise the ports and bit position per call. do it once per construction
@@ -25,7 +25,8 @@ class chASM {
 	
 	/*** Simple input/output functions ****************************************/
 	//Writes a binary state to the pin
-	void write(bool state);
+	inline void write(bool state) __attribute__((always_inline));
+	
 	//Reads and returns a binary state from the pin
 	bool read(void);
 	
@@ -46,5 +47,15 @@ class chASM {
 	volatile uint8_t *_asm_opr; //Output register for the pin
 	volatile uint8_t *_asm_ipr; //Input register for the pin
 }; //class chASM
+
+/** Inline Methods must be declared here **************************************/
+//Write binary state to the pin
+void chASM::write(bool state) {
+	if(state == 0) {
+		*_asm_opr &= _asm_mask_inv; //Set mask bit in output register to LOW
+	} else {
+		*_asm_opr |= _asm_mask_nom; //Set mask bit in output register to HIGH
+	}
+}
 
 #endif

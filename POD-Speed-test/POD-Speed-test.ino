@@ -1,22 +1,18 @@
-/*    chASM - control hardware /with/ ASM
-* Low level hardware control library using Direct Port Manipulation.
-*
-* The safety features of the Arduino system calls are abandoned in return for 
-* added speed and efficiency.
-* Please read the README.md file for more information
-* 
-* If this library is in use within another project, please see the original 
-* github page: https://github.com/ADBeta/chASM
-*	
-* Version 3.2.5
-* 29 Dec 2022
-* (c) ADBeta
-*/
+//Make a mimic of a chASM object, just without the class and methods. this will
+//see if there is any inherant slowdown caused by class overhead.
+//***** ~1us - 1.133MHz ********************//
+// 85% Improvement!!!!!
 
-#include "chASM.h"
+uint8_t _asm_mask_nom; //Bitmask of the chASM pin - Normal form, eg 00010
+uint8_t _asm_mask_inv; //Bitmask inverted eg 11101
 
-//Initialise the assembly pin object and set all the internal vars
-chASM::chASM(uint8_t pin) {
+uint8_t _asm_port; //Which hardware port the pin belongs to
+
+volatile uint8_t *_asm_ddr; //Data Direction Register (for input/output)
+volatile uint8_t *_asm_opr; //Output register for the pin
+volatile uint8_t *_asm_ipr; //Input register for the pin
+
+void chASM(uint8_t pin) {
 	//Set the internal variables using the builtin PROGMEM macros
 	_asm_mask_nom = digitalPinToBitMask(pin); //Bitmask of chASM Pin (PGM)
 	_asm_mask_inv = ~_asm_mask_nom; //Invert the Bitmask to use during exec
@@ -27,9 +23,9 @@ chASM::chASM(uint8_t pin) {
 	_asm_opr = portOutputRegister(_asm_port); //Ouput Register (volatile)
 	_asm_ipr = portInputRegister(_asm_port); //Input Register (volatile)
 }
-
+	
 //Set the mode register of the pin
-void chASM::setMode(uint8_t mode) {
+void setMode(uint8_t mode) {
 	if(mode == OUTPUT) {
 		*_asm_ddr |= _asm_mask_nom; //DDR bit to 1
 	}
@@ -45,8 +41,17 @@ void chASM::setMode(uint8_t mode) {
 	}
 }
 
+//Write binary state to the pin
+void write(bool state) {
+	if(state == 0) {
+		*_asm_opr &= _asm_mask_inv; //Set mask bit in output register to LOW
+	} else {
+		*_asm_opr |= _asm_mask_nom; //Set mask bit in output register to HIGH
+	}
+}
+
 //Read a binary state from the pin and return it
-bool chASM::read(void) {
+bool read(void) {
 	//Read the input register and mask it. Simple comparation is faster than	
 	//greater than/less than etc. If compare with 0 is true, the pin is LOW
 	if((*_asm_ipr & _asm_mask_nom) == 0) {
@@ -55,4 +60,16 @@ bool chASM::read(void) {
 	
 	//Return 1 if data is not 0
 	return 1;
+}
+
+void setup() {
+  chASM(8);
+
+	setMode(OUTPUT);
+
+}
+
+void loop() {
+	write(HIGH);
+	write(LOW);
 }
