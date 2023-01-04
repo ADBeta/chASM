@@ -8,8 +8,8 @@
 * If this library is in use within another project, please see the original 
 * github page: https://github.com/ADBeta/chASM
 *	
-* Version 3.2.5
-* 29 Dec 2022
+* Version 4.2.5
+* 04 Jan 2023
 * (c) ADBeta
 */
 

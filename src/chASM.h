@@ -1,4 +1,4 @@
-/*    chASM - control hardware /with/ ASM
+*    chASM - control hardware /with/ ASM
 * Low level hardware control library using Direct Port Manipulation.
 *
 * The safety features of the Arduino system calls are abandoned in return for 
