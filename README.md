@@ -5,7 +5,7 @@ chASM is an Arduino library to allow very fast hardware control using Direct Por
 Manipulation. This is ideal for projects that require high speed digital hardware  
 control.  
 
-Support for the low-sped MCUs (ATTiny series) -should- be baked in and is  
+Support for the low-speed MCUs (ATTiny series) -should- be baked in and is  
 intended to be used, Please let me know if this is not the case, and if you  
 come across any other problems.  
 
@@ -15,7 +15,7 @@ inlined, causing slightly higher Program Space Usage. Please keep this in mind.
 While this library *can* be used as a drop-in replacement for digitalRead, pinMode  
 and digitalWrite, this is not completely recommended, as this library uses more  
 Program Storage than the system default functions - It also does not have the safety  
-checks and failmodes the system default options do.  
+checks and failstates the system default options do.  
 As such, this library is only recommended for slightly experienced programmers.  
 
 ## Usage
@@ -117,8 +117,8 @@ chASM:         690.1KHz    4.55x faster
 * Make Program Space overhead as small as possible. Optimize function size.  
 
 ## Changelog
-* 2.0.1 - Added better readibilty.  
-* 2.1.0 - Added speed tests, bugfixed.  
+* 2.0.1 - Added better readability.  
+* 2.1.0 - Added speed tests, bug-fixed.  
 * 2.1.4 - Improved the speed_test example.  
 * 3.1.4 - Changed how the Bitmasking worked, so bitwise inversion isn't done  
 every time the functions are called. This increased speed by another 2x  
