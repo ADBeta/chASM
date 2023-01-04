@@ -35,6 +35,13 @@ Inlined chASM: PRGM usage: 1082 Bytes / 66 bytes    speed: 10.15KHz
 
 This uses 4% more PRGM, for a 15% speed improvement. Is this an okay sacrifice?  
 
+----
+Using a different method in FastSR595, speed stayed the same. This is good enough  
+proof that it is fast enough.  
+
+Using unary shifts per execution, speed increased to 12.74KHz. this effect stayed  
+even when the txBit() and latch() functions are being called. I am happy with this :)  
+
 --------------------------------------------------------------------------------
 This software is under the GPL v3 licence by ADBeta 2022. please read the
 LICENCE file
