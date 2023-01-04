@@ -1,19 +1,4 @@
 # chASM - Control Hardware /with/ ASM 
-<<<<<<< HEAD
-## Optimization chasing branch 
-<b> (c) ADBeta  2023</b>
-
-<b> This branch is chasing optimizations... Since testing the speed of chASM, which  
-showed to be around 4x faster at best, and slowed down the more times the functions  
-were called. - Having since then tested a Plain-Old-Data version of the library  
-I can see that the back anf forth calling of - specifically class - functions  
-is much slower desired.  
-
-chASM Release 1 got a best case speed of 610KHz, and the P.O.D version got  
-1.133MHz, an 85% improvement. (POD-Speed-test.ino).  
-
-Multiple function calls per scope is still slower than desired.</b>  
-=======
 <b> (c) ADBeta 2023</b>
 
 chASM is an Arduino library to allow very fast hardware control using Direct Port  
@@ -32,38 +17,44 @@ and digitalWrite, this is not completely recommended, as this library uses more
 Program Storage than the system default functions - It also does not have the safety  
 checks and failmodes the system default options do.  
 As such, this library is only recommended for slightly experienced programmers.  
->>>>>>> 6e46767 (v4.2.5)
 
-Plan A) externalized calls with read and write. Pass variables to functions  
---- This did not work. Same speed as before  
+## Usage
+All chASM Pins are treated as objects, this is to keep all the information and  
+reference bytes in RAM - avoiding slow reads from PGM aka EEPROM every time the  
+functions are called (such as happens in digitalWrite etc).  
 
-Plan B) Inline functions  
---- Could be done but is very unreliable  
+To declare a chASM Pin -  
+`chASM pinName(pinNumber);`
 
-Omitting if test in write() increases speed by 50KHz  
+To set the mode of the chASM Pin -  
+`pinName.setMode(t_MODE);`
 
-Plan B was not fully realized because inlining on arduino is specific and weird.  
-Test again with actual inlineing:  
+To Write a bit to the chASM Pin -  
+`pinName.write(0 or 1);`
 
---- Inlining write() makes it marginally faster, now the bottleneck is in loop()  
-function calls. This is a good improvement. Each call to write() takes 17 bytes.  
-- Each digitalWrite call takes 6 bytes. this is a 2.8% increase in PGRM space usage  
+To Read a bit from the chASM Pin -  
+`pinName.read();`
 
-********************************************************************************
-Testing mockup of SR595 using inlined function calls.  
-chASM without inline: PRGM usage: 1038 Bytes / 66 Bytes   speed: 8.84KHz  
-Inlined chASM: PRGM usage: 1082 Bytes / 66 bytes    speed: 10.15KHz  
+To use chASM inside another class, i.e. to use chASM instead of digitalRead/Write  
+inside another library, can be done via pointers and static declarations.  
+NOTE: Include chASM.cpp and chASM.h in the src directory of any library you make  
+and chASM can be portable to any host, project or library.  
+```
+//inside class or library scope
+struct extScope {
+	chASM *pin;
 
-This uses 4% more PRGM, for a 15% speed improvement. Is this an okay sacrifice?  
+	void setPin(int pName) {
+		//Create static chASM object with name ref_pin
+		static chASM ref_pin(pName);
+		
+		//Set *pin to point to ref_pin 
+		pin = &ref_pin;
+	}
+};
 
-----
-Using a different method in FastSR595, speed stayed the same. This is good enough  
-proof that it is fast enough.  
+extScope.setPin(13);
 
-<<<<<<< HEAD
-Using unary shifts per execution, speed increased to 12.74KHz. this effect stayed  
-even when the txBit() and latch() functions are being called. I am happy with this :)  
-=======
 //Write a high output to the pin pointer in extScope
 extScope.pin->setMode(OUTPUT);
 extScope.pin->write(HIGH);
@@ -144,7 +135,6 @@ every time the functions are called. This increased speed by another 2x
 to Usage  
 * 3.2.5 - Added an external library example in the examples dir.  
 * 4.2.5 - Inline solution to speed problem. End result of Optimize branch.  
->>>>>>> 6e46767 (v4.2.5)
 
 --------------------------------------------------------------------------------
 This software is under the GPL v3 licence by ADBeta 2023. please read the
